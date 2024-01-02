@@ -6,25 +6,33 @@ class Question():
         self.triviaquestion = triviaquestion
         self.answers = [answer1, answer2, answer3, answer4]
         self.correctanswer = correctanswer
+    
     def getAnswer(self, index):
         return self.answers[index]
     
-    def getquestion(self):
+    def get_question(self):
         return self.triviaquestion
 
-    def getcorrectanswer(self):
+    def get_correctanswer(self):
         return self.correctanswer
-        
+
+    def set_question(self, qtext):
+        self.triviaquestion = qtext
+
+    def set_correctanswer(self, canswer):
+        self.correctanswer = canswer
+
 qSet = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def askQuestion(trquestions):
-        for x in qSet:
-            r = random.randint(1,10)
-            if (x == r):
-                qSet.remove(r)
-                break
-        q = trquestions[r-1]
-        print(q.triviaquestion)
+        x = -1
+        while x==-1:
+            r = random.randint(0,9)
+            if qSet.__contains__(r):
+                x = r
+                qSet.remove(x)
+        q = trquestions[x]
+        print(q.get_question())
         ord = 1
         for a in q.answers:
             print(ord, ":" , a)
@@ -33,25 +41,25 @@ def askQuestion(trquestions):
 
 def checkAnswer(q, ans):
         print(q.getAnswer(ans-1))
-        if (ans == q.correctanswer):
+        if (ans == q.get_correctanswer()):
             print("Success")
             return 1
         else: 
-            print("False")
+            print("Wrong")
             return 0
 
 def main():
     trquestions = []
-    trquestions.append(Question("Bir bir daha kaç eder?", "1", "2", "3", "4", 2))
-    trquestions.append(Question("iki kere iki  kaç eder?", "1", "2", "3", "4", 4))
-    trquestions.append(Question("üç üç daha kaç eder?", "6", "2", "3", "4", 1))
-    trquestions.append(Question("dört dört daha kaç eder?", "12", "16", "8", "2", 3))
-    trquestions.append(Question("beş beş daha kaç eder?", "10", "20", "30", "40", 1))
-    trquestions.append(Question("altı altı daha kaç eder?", "11", "12", "13", "14", 2))
-    trquestions.append(Question("yedi yedi daha kaç eder?", "15", "21", "31", "14", 4))
-    trquestions.append(Question("sekiz sekiz daha kaç eder?", "16", "24", "32", "40", 1))
-    trquestions.append(Question("dokuz dokuz daha kaç eder?", "18", "22", "32", "49", 1))
-    trquestions.append(Question("on kere on kaç eder?", "10", "20", "30", "100", 4))
+    trquestions.append(Question("Bir bir daha kaç eder?", "1", "2", "3", "4", correctanswer=2))
+    trquestions.append(Question("iki kere iki  kaç eder?", "1", "2", "3", "4", correctanswer=4))
+    trquestions.append(Question("üç üç daha kaç eder?", "6", "2", "3", "4", correctanswer=1))
+    trquestions.append(Question("dört dört daha kaç eder?", "12", "16", "8", "2", correctanswer=3))
+    trquestions.append(Question("beş beş daha kaç eder?", "10", "20", "30", "40", correctanswer=1))
+    trquestions.append(Question("altı altı daha kaç eder?", "11", "12", "13", "14", correctanswer=2))
+    trquestions.append(Question("yedi yedi daha kaç eder?", "15", "21", "31", "14", correctanswer=4))
+    trquestions.append(Question("sekiz sekiz daha kaç eder?", "16", "24", "32", "40", correctanswer=1))
+    trquestions.append(Question("dokuz dokuz daha kaç eder?", "18", "22", "32", "49", correctanswer=1))
+    trquestions.append(Question("on kere on kaç eder?", "10", "20", "30", "100", correctanswer=4))
 
     playerOneScore = 0
     playerTwoScore = 0
