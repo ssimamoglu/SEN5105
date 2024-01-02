@@ -1,22 +1,25 @@
 
 import random
 
-
 class Question():
-    triviaquestion = ""
     def __init__(self, triviaquestion, answer1, answer2, answer3, answer4, correctanswer):
         self.triviaquestion = triviaquestion
         self.answers = [answer1, answer2, answer3, answer4]
         self.correctanswer = correctanswer
     def getAnswer(self, index):
         return self.answers[index]
+    
+    def getquestion(self):
+        return self.triviaquestion
+
+    def getcorrectanswer(self):
+        return self.correctanswer
         
 qSet = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def askQuestion(trquestions):
         for x in qSet:
             r = random.randint(1,10)
-            print("x:",x,"r:",r)
             if (x == r):
                 qSet.remove(r)
                 break
@@ -36,7 +39,6 @@ def checkAnswer(q, ans):
         else: 
             print("False")
             return 0
-
 
 def main():
     trquestions = []
@@ -65,11 +67,10 @@ def main():
         playerTwoScore = playerTwoScore + checkAnswer(q, ans)
         print("Player1: ", playerOneScore, " Player2: ", playerTwoScore)
 
-    print(playerOneScore, playerTwoScore)
     if (playerOneScore > playerTwoScore):
-        print("Player1 is the winner")
+        print("Player1 is the winner. Score is: ", playerOneScore)
     elif (playerOneScore < playerTwoScore):
-        print("Player2 is the winner")
+        print("Player2 is the winner. Score is: ", playerTwoScore)
     elif (playerOneScore == playerTwoScore):
         print("Drawback")
 
