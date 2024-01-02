@@ -68,11 +68,11 @@ def main():
         print("Player1 it's your turn")
         q = askQuestion(trquestions)
         ans = int(input("What's your answer? "))
-        playerOneScore = playerOneScore + checkAnswer(q, ans)
+        playerOneScore += checkAnswer(q, ans)
         print("Player2 it's your turn")
         q = askQuestion(trquestions)
         ans = int(input("What's your answer? "))
-        playerTwoScore = playerTwoScore + checkAnswer(q, ans)
+        playerTwoScore += checkAnswer(q, ans)
         print("Player1: ", playerOneScore, " Player2: ", playerTwoScore)
 
     if (playerOneScore > playerTwoScore):
