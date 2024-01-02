@@ -1,10 +1,12 @@
 import datetime
+import string
+
 class Procedure:
 
     def __init__(self, procname, date, practitioner, charge):
-        self.procname = procname,
-        self.date = date,
-        self.practitioner = practitioner,
+        self.procname = procname
+        self.date = date
+        self.practitioner = practitioner
         self.charge = charge
 
     def set_procname(self, procname):
@@ -22,16 +24,16 @@ class Procedure:
 class Patient:
    
     def __init__(self, firstname, middlename, lastname, address, city, state, zipcode, phoneNumber, emergencyContactName, emergencyContactPhoneNumber, procedure):
-        self.firstname = firstname,
-        self.middlename = middlename,
-        self.lastname = lastname,
-        self.address = address,
-        self.city = city,
-        self.state = state,
-        self.zipcode = zipcode,
-        self.phoneNumber = phoneNumber,
-        self.emergencyContactName = emergencyContactName,
-        self.emergencyContactPhoneNumber = emergencyContactPhoneNumber,
+        self.firstname = firstname
+        self.middlename = middlename
+        self.lastname = lastname
+        self.address = address
+        self.city = city
+        self.state = state
+        self.zipcode = zipcode
+        self.phoneNumber = phoneNumber
+        self.emergencyContactName = emergencyContactName
+        self.emergencyContactPhoneNumber = emergencyContactPhoneNumber
         self.procedure = procedure
     
     def set_firstname(self, value):
@@ -68,21 +70,24 @@ class Patient:
         self.procedure = procedure
 
 def printPatient(patient):
-    print(patient.firstname)
-    print("Hasta adı:", patient.firstname , " " , patient.middlename , " " , patient.lastname)
-    print("Hasta Adresi:", patient.address , " " , patient.city , " " , patient.zipcode)
-    print("Hasta Yakını:", patient.emergencyContactName , " " , patient.emergencyContactPhoneNumber)
-    print("Procedure:", patient.procedure.procname , " " , patient.procedure.date, " ", patient.procedure.charge)
+    print("__Patient__:")
+    print("Name:", patient.firstname , " " , patient.middlename.strip() , " " , patient.lastname)
+    print("Address:", patient.address , " " , patient.city , " " , patient.zipcode)
+    print("Phone Number:", patient.phoneNumber)
+    print("__Emergency Contact__:")
+    print("Name: ", patient.emergencyContactName , " Phone Number: " , patient.emergencyContactPhoneNumber)
+    print("__Procedure__:")
+    print("Procedure Name:", patient.procedure.procname , " Date: " , patient.procedure.date, " Charge: ", patient.procedure.charge)
 
 def main():
 
     prc1 = Procedure("Pysical Exam", datetime.date.today(), "Dr. Irvine", 250)
-    patient1 = Patient("Ali", "", "Yılmaz", "Örnek Mah. Buket sok", "İstanbul", "", "34696", "05322332323", "Ayşe Yılmaz", "05322332324", prc1)
+    patient1 = Patient("Ali", "Mete", "Yılmaz", "Örnek Mah. Buket sok", "İstanbul", "", "34696", "05322332323", "Ayşe Yılmaz", "05322332324", prc1)
     prc2 = Procedure("X-Ray", datetime.date.today(), "Dr. Irvine", 500)
-    patient2 = Patient("Ayşe", "", "Yılmaz", "Örnek Mah. Buket sok", "İstanbul", "", "34696", "05322332324", "Ali Yılmaz", "05322332323", prc2)
+    patient2 = Patient("Ayşe", "Fatma", "Yılmaz", "Örnek Mah. Buket sok", "İstanbul", "", "34696", "05322332324", "Ali Yılmaz", "05322332323", prc2)
     patient2.procedure= prc2
     prc3 = Procedure("Pysical Exam", datetime.date.today(), "Dr. Irvine", 200)
-    patient3 = Patient("Ahmet", "", "Yılmaz", "Örnek Mah. Buket sok", "İstanbul", "", "34696", "05322332325", "Mehmet Yılmaz", "05322332326", prc3)
+    patient3 = Patient("Ahmet", "Nuri", "Yılmaz", "Örnek Mah. Buket sok", "İstanbul", "", "34696", "05322332325", "Mehmet Yılmaz", "05322332326", prc3)
     printPatient(patient1)
     printPatient(patient2)
     printPatient(patient3)
