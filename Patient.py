@@ -23,13 +23,13 @@ class Procedure:
     def get_procname(self):
         return self.procname
 
-    def set_date(self):
+    def get_date(self):
         return self.date
     
-    def set_practitioner(self):
+    def get_practitioner(self):
         return self.practitioner
 
-    def set_charge(self):
+    def get_charge(self):
         return self.charge
 
     def printProc(self):
@@ -40,7 +40,7 @@ class Procedure:
 
 class Patient:
    
-    def __init__(self, firstname, middlename, lastname, address, city, state, zipcode, phoneNumber, emergencyContactName, emergencyContactPhoneNumber, procedure):
+    def __init__(self, firstname, middlename, lastname, address, city, state, zipcode, phoneNumber, emergencyContactName, emergencyContactPhoneNumber, procedures):
         self.firstname = firstname
         self.middlename = middlename
         self.lastname = lastname
@@ -51,7 +51,7 @@ class Patient:
         self.phoneNumber = phoneNumber
         self.emergencyContactName = emergencyContactName
         self.emergencyContactPhoneNumber = emergencyContactPhoneNumber
-        self.procedure = procedure
+        self.procedures = procedures
     
     def set_firstname(self, value):
         self.firstname = value
@@ -83,8 +83,8 @@ class Patient:
     def set_emergencyContactPhoneNumber(self, value):
         self.emergencyContactPhoneNumber = value
 
-    def set_procedure(self, procedure):
-        self.procedure = procedure
+    def set_procedure(self, procedures):
+        self.procedures = procedures
 
     def get_firstname(self):
         return self.firstname
@@ -116,8 +116,8 @@ class Patient:
     def get_emergencyContactPhoneNumber(self):
         return self.emergencyContactPhoneNumber
 
-    def get_procedure(self):
-        return self.procedure
+    def get_procedures(self):
+        return self.procedures
     
     def printPatient(self):
         print("Name :", self.firstname)
@@ -134,32 +134,30 @@ class Patient:
         print("Phone Number: ", self.emergencyContactPhoneNumber)
 
 
-def printPatient(patient, order):
-    print("__Patient__", order+1, ":")
+def printPatient(patient):
+    print("__Patient__:")
     patient.printPatient()
     print("__Emergency Contact__:")
     patient.printEmergencyContact()
-    print("__Procedure__:")
-    patient.procedure.printProc()
+    print("__Procedures__:")
+    totalCharge = 0
+    for pc in patient.procedures:
+        print("Procedure #", patient.procedures.index(pc)+1)
+        totalCharge += pc.charge
+        pc.printProc()
+    print("Total Charge:", totalCharge)
+    
 
 def main():
+    prcs = []
+    prc = Procedure("Pysical Exam", datetime.date.today(), "Dr. Irvine", 250)
+    prcs.append(prc)
+    prc = Procedure("X-Ray", datetime.date.today(), "Dr. Irvine", 500)
+    prcs.append(prc)
+    prc = Procedure("Pysical Exam", datetime.date.today(), "Dr. Irvine", 200)
+    prcs.append(prc)
 
-    ps = []
-    prc1 = Procedure("Pysical Exam", datetime.date.today(), "Dr. Irvine", 250)
-    patient1 = Patient("Ali", "Mete", "Yılmaz", "Örnek Mah. Buket sok", "İstanbul", "", "34696", "05322332323", "Ayşe Yılmaz", "05322332324", prc1)
-    ps.append(patient1)
-    prc2 = Procedure("X-Ray", datetime.date.today(), "Dr. Irvine", 500)
-    patient2 = Patient("Ayşe", "Fatma", "Yılmaz", "Örnek Mah. Buket sok", "İstanbul", "", "34696", "05322332324", "Ali Yılmaz", "05322332323", prc2)
-    patient2.procedure= prc2
-    ps.append(patient2)
-    prc3 = Procedure("Pysical Exam", datetime.date.today(), "Dr. Irvine", 200)
-    patient3 = Patient("Ahmet", "Nuri", "Yılmaz", "Örnek Mah. Buket sok", "İstanbul", "", "34696", "05322332325", "Mehmet Yılmaz", "05322332326", prc3)
-    ps.append(patient3)
-    totalCharge = 0
-    for p in ps:
-        totalCharge += p.procedure.charge
-        printPatient(p, ps.index(p))
-
-    print("Total Charge:", totalCharge)
+    patient = Patient("Ali", "Mete", "Yılmaz", "Örnek Mah. Buket sok", "İstanbul", "", "34696", "05322332323", "Ayşe Yılmaz", "05322332324", prcs)
+    printPatient(patient)
 
 main()
