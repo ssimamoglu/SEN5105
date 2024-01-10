@@ -7,21 +7,21 @@ def encrypt(text, key):
         if (ascii_uppercase.find(charUpper) != -1):
             newindex = (ascii_uppercase.index(charUpper) + key) % 26
             newcode = ascii_uppercase[newindex]
-            ciphertext = ciphertext + newcode
+            ciphertext += newcode
         else:
-            ciphertext = ciphertext + charUpper
+            ciphertext += charUpper
     return ciphertext
            
 def decrypt(text, key):
     ciphertext = ""
-    for char in text:
+    for char in text: 
         charUpper = char.upper()
         if (ascii_uppercase.find(charUpper) != -1):
             newindex = (ascii_uppercase.index(charUpper) - key) % 26
             newcode = ascii_uppercase[newindex]
-            ciphertext = ciphertext + newcode
+            ciphertext += newcode
         else:
-            ciphertext = ciphertext + charUpper
+            ciphertext += charUpper
     return ciphertext
 
 
